@@ -1,0 +1,30 @@
+.mat-card {
+  width: 100%;
+  min-width: 10em;
+}
+
+.mat-card-header {
+  width: 100%;
+}
+
+.receber {
+  background-color: lightgreen;
+  color: darkgreen;
+}
+
+.pagar {
+  background-color: indianred;
+  color: darkred;
+}
+
+.mat-card-content {
+  padding: 2px;
+  margin-left: 10px;
+}
+
+.mat-list-item {
+  padding-top: 2em !important;
+  padding-bottom: 2em !important;
+  margin-top: .5em !important;
+  margin-bottom: .5em !important;
+}
