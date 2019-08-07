@@ -1,11 +1,12 @@
 package br.com.solutis.treinamento.service;
 
 import br.com.solutis.treinamento.model.entity.Conta;
+import br.com.solutis.treinamento.model.enums.ContaCicloEnum;
 import br.com.solutis.treinamento.repository.ContaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -23,7 +24,22 @@ public class ContaService{
     }
 
     public Long insertConta(Conta conta) {
-        conta.setDataCriacao(new Date());
-        return contaRepository.save(conta).getId();
+        LocalDate today = LocalDate.now();
+        conta.setDataCriacao(today);
+        Long idPirmeiraParcela = contaRepository.save(conta).getId();
+        if(conta.getCiclo().equals(ContaCicloEnum.PARCELADA)) {
+            for (int i = 1; i < conta.getParcelas(); i++) {
+                conta = new Conta(null,
+                        conta.getNome(),
+                        conta.getTipo(),
+                        conta.getCiclo(),
+                        conta.getParcelas(),
+                        conta.getValor(),
+                        today.plusMonths(i),
+                        idPirmeiraParcela);
+                contaRepository.save(conta);
+            }
+        }
+        return idPirmeiraParcela;
     }
 }

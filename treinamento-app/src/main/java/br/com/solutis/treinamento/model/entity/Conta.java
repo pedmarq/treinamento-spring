@@ -2,14 +2,18 @@ package br.com.solutis.treinamento.model.entity;
 
 import br.com.solutis.treinamento.model.enums.ContaCicloEnum;
 import br.com.solutis.treinamento.model.enums.ContaTipoEnum;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "contas")
 public class Conta {
     @Id
@@ -32,18 +36,8 @@ public class Conta {
     private BigDecimal valor;
 
     @Column(nullable = false)
-    private Date dataCriacao;
+    private LocalDate dataCriacao;
 
-    public Conta() {}
-
-    public Conta(String nome, ContaTipoEnum tipo, ContaCicloEnum ciclo, Integer parcelas, BigDecimal valor, Date dataCriacao) {
-        this.nome = nome;
-        this.tipo = tipo;
-        this.ciclo = ciclo;
-        this.parcelas = parcelas;
-        this.valor = valor;
-        this.dataCriacao = dataCriacao;
-    }
-
-
+    @Column(nullable = true)
+    private Long idPrimeiraParcela;
 }

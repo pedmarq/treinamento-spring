@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 @Builder
@@ -17,5 +17,6 @@ public class ContaDTO {
     private ContaCicloEnum ciclo;
     private Integer parcelas;
     private BigDecimal valor;
-    private Date dataCriacao;
+    private LocalDate dataCriacao;
+    private Long idPrimeiraParcela;
 }
