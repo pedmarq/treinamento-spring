@@ -1,9 +1,9 @@
 package br.com.solutis.treinamento.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
@@ -14,6 +14,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
+
+    @Value("${app.version}")
+    private String appVersion;
 
     @Bean
     public Docket treinamentoApi() {
@@ -28,9 +31,9 @@ public class SwaggerConfig {
         return new ApiInfoBuilder()
                 .title("Spring Boot REST API")
                 .description("\"Spring Boot REST API for treinamento JAVA\"")
-                .version("0.0.1-SNAPSHOT")
-                .license("Apache License Version 2.0")
-                .licenseUrl("https://www.apache.org/license/LICENSE-2.0")
+                .version(appVersion)
+                .license("MIT License")
+                .licenseUrl("https://opensource.org/licenses/MIT")
                 .build();
     }
 

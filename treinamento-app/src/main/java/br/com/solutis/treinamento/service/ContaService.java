@@ -1,9 +1,12 @@
 package br.com.solutis.treinamento.service;
 
+import br.com.solutis.treinamento.model.dto.ContaUpdateDTO;
 import br.com.solutis.treinamento.model.entity.Conta;
 import br.com.solutis.treinamento.model.enums.ContaCicloEnum;
 import br.com.solutis.treinamento.repository.ContaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -41,5 +44,22 @@ public class ContaService{
             }
         }
         return idPirmeiraParcela;
+    }
+
+    public ResponseEntity<String> updateConta(Long id, ContaUpdateDTO conta) {
+        Conta contaBanco = contaRepository.findById(id).orElse(new Conta());
+        if(contaBanco.getId() == null) {
+            return new ResponseEntity<>("Conta not found", HttpStatus.NOT_FOUND);
+        }
+
+        if(!contaBanco.getCiclo().equals(ContaCicloEnum.PERMANENTE)) {
+            return new ResponseEntity<>("Conta not PERMANENTE", HttpStatus.BAD_REQUEST);
+        }
+        contaBanco.setNome(conta.getNome() != null ? conta.getNome() : contaBanco.getNome());
+        contaBanco.setValor(conta.getValor() != null ? conta.getValor() : contaBanco.getValor());
+        contaBanco.setDataCriacao(conta.getDataCriacao() != null ? conta.getDataCriacao() : contaBanco.getDataCriacao());
+        contaRepository.saveAndFlush(contaBanco);
+
+        return ResponseEntity.ok("Updated");
     }
 }
