@@ -1,11 +1,9 @@
 package br.com.solutis.treinamento.controller;
 
-import br.com.solutis.treinamento.model.Conta;
+import br.com.solutis.treinamento.model.entity.Conta;
 import br.com.solutis.treinamento.service.ContaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,4 +18,10 @@ public class ContaController {
     public List<Conta> getContas() {
         return contaService.getContas();
     }
+
+    @GetMapping("/contas/{mes}")
+    public List<Conta> getContasMes(@PathVariable("mes") Integer mes) { return contaService.getContasMes(mes); }
+
+    @PostMapping("/conta")
+    public Long insertConta(@RequestBody Conta conta) { return contaService.insertConta(conta); }
 }

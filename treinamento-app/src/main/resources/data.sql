@@ -1,13 +1,16 @@
 DROP TABLE IF EXISTS contas;
 
 CREATE TABLE contas (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    descricao VARCHAR(250) NOT NULL,
-    valor NUMERIC(18,2) DEFAULT 0.0,
-    tipo CHAR DEFAULT 'R'
+    id IDENTITY PRIMARY KEY,
+    nome VARCHAR(250) NOT NULL,
+    tipo ENUM('PAGAR', 'RECEBER') NOT NULL DEFAULT 'PAGAR',
+    ciclo ENUM('PERMANENTE', 'PARCELADA') NOT NULL DEFAULT 'PERMANENTE',
+    parcelas INT NOT NULL DEFAULT 1,
+    valor NUMERIC(18,2) NOT NULL DEFAULT 0.0,
+    data_criacao DATE NOT NULL
 );
 
-INSERT INTO contas(descricao, valor, tipo) VALUES
-    ('Joao', 503.56, 'R'),
-    ('Maria', 102.30, 'P'),
-    ('Josefina', 10000.00, 'R');
+INSERT INTO contas(id, nome, tipo, ciclo, parcelas, valor, data_criacao) VALUES
+    (100, 'Joao', 'RECEBER', 'PERMANENTE', 1, 503.56, CURRENT_DATE),
+    (101, 'Maria', 'PAGAR', 'PERMANENTE', 1, 102.30, CURRENT_DATE),
+    (102, 'Josefina', 'RECEBER', 'PARCELADA', 4, 10000.00, CURRENT_DATE);
