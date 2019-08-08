@@ -7,8 +7,12 @@ import {
   MatToolbarModule,
   MatIconModule,
   MatCardModule,
-  MatListModule
+  MatListModule,
+  MatGridListModule,
+  MatSidenavModule
 } from '@angular/material';
+
+import { LayoutModule } from '@angular/cdk/layout';
 
 @NgModule({
   imports: [
@@ -18,7 +22,10 @@ import {
     MatToolbarModule,
     MatIconModule,
     MatCardModule,
-    MatListModule
+    MatListModule,
+    MatGridListModule,
+    MatSidenavModule,
+    LayoutModule
   ],
   exports: [
     MatButtonModule,
@@ -27,7 +34,10 @@ import {
     MatToolbarModule,
     MatIconModule,
     MatCardModule,
-    MatListModule
+    MatListModule,
+    MatGridListModule,
+    MatSidenavModule,
+    LayoutModule
   ]
 })
 export class MaterialModule {}
