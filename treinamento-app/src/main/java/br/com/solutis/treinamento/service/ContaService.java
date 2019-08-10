@@ -36,7 +36,7 @@ public class ContaService{
     public Long insertConta(Conta conta) {
         LocalDate today = LocalDate.now();
         conta.setDataCriacao(today);
-        Long idPirmeiraParcela = contaRepository.save(conta).getId();
+        Long idPrimeiraParcela = contaRepository.save(conta).getId();
         if(conta.getCiclo().equals(ContaCicloEnum.PARCELADA)) {
             for (int i = 1; i < conta.getParcelas(); i++) {
                 conta = new Conta(null,
@@ -46,11 +46,11 @@ public class ContaService{
                         conta.getParcelas(),
                         conta.getValor(),
                         today.plusMonths(i),
-                        idPirmeiraParcela);
+                        idPrimeiraParcela);
                 contaRepository.save(conta);
             }
         }
-        return idPirmeiraParcela;
+        return idPrimeiraParcela;
     }
 
     public ResponseEntity<String> updateConta(Long id, ContaUpdateDTO conta) {
