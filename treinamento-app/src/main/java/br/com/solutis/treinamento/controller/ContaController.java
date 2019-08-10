@@ -28,7 +28,7 @@ public class ContaController {
 
     @ApiOperation("Gets list of Contas of month \"mes\"")
     @GetMapping(value = "/contas/{mes}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public List<Conta> getContasMes(@PathVariable("mes") Integer mes) { return contaService.getContasMes(mes); }
+    public ResponseEntity<Object[]> getContasMes(@PathVariable("mes") Integer mes) { return contaService.getContasMes(mes); }
 
     @ApiOperation("Inserts new Conta")
     @PostMapping("/conta")

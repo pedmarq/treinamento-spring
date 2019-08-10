@@ -3,12 +3,14 @@ package br.com.solutis.treinamento.service;
 import br.com.solutis.treinamento.model.dto.ContaUpdateDTO;
 import br.com.solutis.treinamento.model.entity.Conta;
 import br.com.solutis.treinamento.model.enums.ContaCicloEnum;
+import br.com.solutis.treinamento.model.enums.ContaTipoEnum;
 import br.com.solutis.treinamento.repository.ContaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -22,8 +24,13 @@ public class ContaService{
         return contaRepository.findAll();
     }
 
-    public List<Conta> getContasMes(Integer mes) {
-        return contaRepository.findAllByMes(mes);
+    public ResponseEntity<Object[]> getContasMes(Integer mes) {
+        List<Conta> contas = contaRepository.findAllByMes(mes);
+        BigDecimal saldo = new BigDecimal(0);
+        for (Conta conta : contas) {
+            saldo = conta.getTipo().equals(ContaTipoEnum.RECEBER) ? saldo.add(conta.getValor()) : saldo.subtract(conta.getValor());
+        }
+        return ResponseEntity.ok(new Object[]{saldo, contas});
     }
 
     public Long insertConta(Conta conta) {

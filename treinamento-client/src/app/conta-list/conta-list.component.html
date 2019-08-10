@@ -7,7 +7,10 @@
         <mat-card-subtitle>{{item.tipo}}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
-        <p>{{item.valor | currency:'BRL'}}</p>
+        <div fxLayout="row" fxLayoutAlign="space-between none">
+          <p style='float: left;'>{{item.valor | currency:'BRL'}}</p>
+          <p style='float: right;'>{{item.dataCriacao | date:'dd/MM/yyyy'}}</p>
+        </div>
       </mat-card-content>
     </mat-card>
   </mat-list-item>

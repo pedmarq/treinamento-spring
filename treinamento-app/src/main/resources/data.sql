@@ -18,6 +18,6 @@ INSERT INTO contas(id, nome, tipo, ciclo, parcelas, valor, data_criacao, id_prim
     (103, 'Josefina', 'RECEBER', 'PARCELADA', 4, 2500.00, DATEADD(MONTH, 1, CURRENT_DATE), 102),
     (104, 'Josefina', 'RECEBER', 'PARCELADA', 4, 2500.00, DATEADD(MONTH, 2, CURRENT_DATE), 102),
     (105, 'Josefina', 'RECEBER', 'PARCELADA', 4, 2500.00, DATEADD(MONTH, 3, CURRENT_DATE), 102),
-    (106, 'Godofredo', 'PAGAR', 'PARCELADA', 3, 666.00, CURRENT_DATE, null),
-    (107, 'Godofredo', 'PAGAR', 'PARCELADA', 3, 666.00, DATEADD(MONTH, 1, CURRENT_DATE), 106),
-    (108, 'Godofredo', 'PAGAR', 'PARCELADA', 3, 666.00, DATEADD(MONTH, 2, CURRENT_DATE), 106);
+    (106, 'Godofredo', 'PAGAR', 'PARCELADA', 3, 6666.00, CURRENT_DATE, null),
+    (107, 'Godofredo', 'PAGAR', 'PARCELADA', 3, 6666.00, DATEADD(MONTH, 1, CURRENT_DATE), 106),
+    (108, 'Godofredo', 'PAGAR', 'PARCELADA', 3, 6666.00, DATEADD(MONTH, 2, CURRENT_DATE), 106);
